@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crud Operation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <table id="crud">
+            <caption>Users</caption>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Phone</td>
+                    <td>Email</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr>
+                    <td>abdoelaziz</td>
+                    <td>14548544854</td>
+                    <td>aaa@gmail.com</td>
+                    <td>
+                        <button class="edit">Edit</button>
+                        <button class="delete">Delete</button>
+                    </td>
+                </tr> -->
+            </tbody>
+        </table>
+        <button class="add-user">Add User</button>
+    </div>
+    <div class="popup add">
+        <form action="">
+            <input type="text" placeholder="name" name="name">
+            <input type="tel" placeholder="phone" name="phone">
+            <input type="email" placeholder="email" name="email">
+            <input type="submit" value="submit" >
+        </form>
+    </div>
+
+    <div class="popup update">
+        <form action="">
+            <input type="text" placeholder="name" name="name">
+            <input type="tel" placeholder="phone" name="phone">
+            <input type="email" placeholder="email" name="email">
+            <input type="submit" value="submit" >
+        </form>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+    <script>
+       var firebaseConfig = {
+          apiKey: "AIzaSyDiizsZdzhwfpILzxDjd1CfMcohpjetKfg",
+          authDomain: "fir-crud-ae8b1.firebaseapp.com",
+          databaseURL: "https://fir-crud-ae8b1-default-rtdb.firebaseio.com",
+          projectId: "fir-crud-ae8b1",
+          storageBucket: "fir-crud-ae8b1.appspot.com",
+          messagingSenderId: "791436553192",
+          appId: "1:791436553192:web:cad6f7ab8234ced65c125d"
+        }; 
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+ 
+    <script src="./main.js"></script>
+</body>
+</html>
