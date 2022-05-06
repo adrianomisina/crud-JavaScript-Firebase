@@ -1,7 +1,8 @@
 let tableBody = document.querySelector("tbody")
 let addUser = document.querySelector(".add-user")
 let popup = document.querySelector(".popup")
-let form = document.querySelector("form")
+let addForm = document.querySelector(".add form")
+let updateForm = document.querySelector(".update form")
 //Get a reference to the database service
 var database = firebase.database()
 var usersRef = firebase.database().ref('users/');
@@ -44,26 +45,25 @@ usersRef.on('value', (snapshot) => {
   let editButtons = document.querySelectorAll(".edit");
   editButtons.forEach(edit => {
     edit.addEventListener("click", ()=> {
-      popup.classList.add("active");
+      document.querySelector(".update").classList.add("active");
 
       let userId = edit.parentElement.parentElement.dataset.id;
       usersRef.child(userId).get().then((snapshot => {
-        form.name.value = snapshot.val().name;
-        form.phone.value = snapshot.val().phone;
-        form.email.value = snapshot.val().email;
+        updateForm.name.value = snapshot.val().name;
+        updateForm.phone.value = snapshot.val().phone;
+        updateForm.email.value = snapshot.val().email;
       }))
 
-      form.addEventListener("submit" , (e)=> {
+      updateForm.addEventListener("submit" , (e)=> {
         e.preventDefault()
-          let userId = edit.parentElement.parentElement.dataset.id;
           usersRef.child(userId).update({
-          name: form.name.value,
-          phone: form.phone.value,
-          email: form.email.value,
+          name: updateForm.name.value,
+          phone: updateForm.phone.value,
+          email: updateForm.email.value,
         }).then((onFullFilled)=> {
           alert("Atualizado com Sucesso :)")
-          popup.classList.remove("active")
-          form.reset()
+          document.querySelector(".update").classList.remove("active")
+          updateForm.reset()
         },(onRejected)=>{
           console.log(onRejected)
         })
@@ -77,7 +77,7 @@ usersRef.on('value', (snapshot) => {
     deleteBtn.addEventListener("click", ()=> {
       let userId = deleteBtn.parentElement.parentElement.dataset.id;
       usersRef.child(userId).remove().then(()=> {
-        alert("Excluido com Sucesso");
+        alert("Excluído com Sucesso :) ");
       })
     })
   })
@@ -85,18 +85,20 @@ usersRef.on('value', (snapshot) => {
 
 //Write Dynamic Data
 addUser.addEventListener("click", ()=> {
-  popup.classList.add("active")
-  form.addEventListener("submit", (e)=> {
+  document.querySelector(".add").classList.add("active")
+  addForm.addEventListener("submit", (e)=> {
     e.preventDefault()
-    writeUserData(form.name.value, form.phone.value, form.email.value)
+    writeUserData(addForm.name.value, addForm.phone.value, addForm.email.value)
     popup.classList.remove("active")
-    form.reset()
+    addForm.reset()
   })
 })
 
 //Close popup
 window.addEventListener("click", (e)=> {
   if(e.target === popup)  {
-    popup.classList.remove("active")
+    popup.classList.remove("active");
+    addForm.reset()
+    updateForm.reset()
   }
 })
